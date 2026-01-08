@@ -9,7 +9,6 @@ pipeline {
 
         stage('Checkout SCM') {
             steps {
-                // Checkout code from GitHub
                 git branch: 'main', url: 'https://github.com/gollarambabu846/pythoncidemo.git'
             }
         }
@@ -42,7 +41,7 @@ pipeline {
             steps {
                 sh '''
                 # Run tests using venv python
-                ./${VENV_DIR}/bin/pytest test_app.py
+                ./${VENV_DIR}/bin/python -m pytest test_app.py
                 '''
             }
         }
@@ -50,4 +49,13 @@ pipeline {
 
     post {
         always {
-            echo "Build finis
+            echo "Build finished"
+        }
+        success {
+            echo "Build succeeded!"
+        }
+        failure {
+            echo "Build failed!"
+        }
+    }
+}
