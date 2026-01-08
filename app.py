@@ -1,10 +1,14 @@
-from flask import Flask
+# app.py
+def add(a, b):
+    return a + b
 
+from flask import Flask
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def home():
-    return "Hello, Jenkins CI! Addition: 5"
+    result = add(2, 3)
+    return f"Hello, Jenkins CI! Addition: {result}"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
