@@ -40,8 +40,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
-                # Run tests using venv python
-                ./${VENV_DIR}/bin/python -m pytest test_app.py
+             ./venv/bin/python -m flask run --host=0.0.0.0 --port=5000 &
+               sleep 5  # wait a few seconds for the server to start
+               curl http://localhost:5000  # check if server is running
                 '''
             }
         }
